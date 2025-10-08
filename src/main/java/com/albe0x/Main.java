@@ -15,15 +15,35 @@ public class Main {
 
         BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         PrintWriter out = new PrintWriter(s.getOutputStream(), true);
-        while (true) { 
-            String input = in.readLine();
-            System.out.println(input);
+        
+        out.println("BenveServer 1.0");
+        in.readLine();
 
-            if(input.compareTo("!") == 0){
-                return;
-            }
+        int n1 = Integer.parseInt(in.readLine());
+        int n2 = Integer.parseInt(in.readLine());
+        String opCode = in.readLine();
 
-            out.println(input.toUpperCase());
-        }
+        int result;
+        switch(opCode) {
+            case "1":
+              // +
+              result = n1 + n2;
+              break;
+            case "2":
+              // -
+              result = n1 - n2;
+              break;
+            case "3":
+              // /
+              result = n1 / n2;
+              break;
+            case "4":
+              // *
+              result = n1 * n2;
+              break;
+            default:
+                result = 0;
+          }
+        out.println(result);
     }
 }
