@@ -17,7 +17,8 @@ public class Main {
         PrintWriter out = new PrintWriter(s.getOutputStream(), true);
         
         out.println("BenveServer 1.0");
-        in.readLine();
+        String clientVersion = in.readLine();
+        System.out.println(clientVersion);
 
         int n1 = Integer.parseInt(in.readLine());
         int n2 = Integer.parseInt(in.readLine());
@@ -45,5 +46,6 @@ public class Main {
                 result = 0;
           }
         out.println(result);
+        System.out.println(result);
     }
 }
