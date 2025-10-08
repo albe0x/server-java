@@ -20,11 +20,18 @@ public class Main {
         String clientVersion = in.readLine();
         System.out.println(clientVersion);
 
-        int n1 = Integer.parseInt(in.readLine());
-        int n2 = Integer.parseInt(in.readLine());
+        while (true) {
+        int n1, n2;
+        try {
+          n1 = Integer.parseInt(in.readLine());
+          n2 = Integer.parseInt(in.readLine());
+        } catch (NumberFormatException e) { 
+          return;
+        }
+
         String opCode = in.readLine();
 
-        int result;
+        double result;
         switch(opCode) {
             case "1":
               // +
@@ -36,7 +43,7 @@ public class Main {
               break;
             case "3":
               // /
-              result = n1 / n2;
+              result = (double) n1 / n2;
               break;
             case "4":
               // *
@@ -44,8 +51,10 @@ public class Main {
               break;
             default:
                 result = 0;
+                return;
           }
         out.println(result);
         System.out.println(result);
+        }
     }
 }
