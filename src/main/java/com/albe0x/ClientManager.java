@@ -55,7 +55,7 @@ public class ClientManager extends Thread {
             int riga = Integer.parseInt(sriga) - 1;
             if(liste.size() < riga){
                 out.println("KO");
-                break;
+                continue;
             } else{
                 out.println("OK");
             }
@@ -63,7 +63,7 @@ public class ClientManager extends Thread {
             int posizione = Integer.parseInt(in.readLine()) - 1;
             if((liste.get(riga)).size() < posizione){
                 out.println("KO");
-                break;
+                continue;
             }
             out.println("OK");
             out.println(liste.get(riga).get(posizione));
