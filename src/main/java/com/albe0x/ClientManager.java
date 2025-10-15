@@ -33,11 +33,11 @@ public class ClientManager extends Thread {
         System.out.println(clientVersion);
 
         while (true) {
-            int n1, n2;
+            long n1, n2;
             try {
-                n1 = Integer.parseInt(in.readLine());
+                n1 = Long.parseLong(in.readLine());
                 System.out.println(n1);
-                n2 = Integer.parseInt(in.readLine());
+                n2 = Long.parseLong(in.readLine());
                 System.out.println(n2);
             } catch (NumberFormatException e) {
                 return;
