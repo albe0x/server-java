@@ -5,9 +5,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
+import javax.print.DocFlavor.STRING;
 
 public class ClientManager extends Thread {
     Socket s;
+    private static ArrayList<String> lista1 = new ArrayList<>(Arrays.asList(
+            "Marco Rossi", "Ivan Bruno", "Giulia Neri", "Luca Bianchi", "Sara Galli"));
+
+    private static ArrayList<String> lista2 = new ArrayList<>(Arrays.asList(
+            "Ciccio Bello", "Francesca Pini", "Giorgio Verdi", "Marta Lodi", "Claudio Benvenuti", "Pippo Baudo"));
+
+    private static ArrayList<String> lista3 = new ArrayList<>(Arrays.asList(
+            "Anna Rosa", "Paolo Conti", "Davide Leone", "Chiara Valli", "Elisa Greco"));
+
+    private static final ArrayList<ArrayList<String>> liste = new ArrayList<>(
+            Arrays.asList(lista1, lista2, lista3));
 
     public ClientManager(Socket s) {
         this.s = s;
@@ -28,49 +44,30 @@ public class ClientManager extends Thread {
         BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         PrintWriter out = new PrintWriter(s.getOutputStream(), true);
 
-        out.println("BenveServer 2.0");
-        String clientVersion = in.readLine();
-        System.out.println(clientVersion);
+        out.println("BenveServer 3.0");
 
         while (true) {
-            long n1, n2;
-            try {
-                n1 = Long.parseLong(in.readLine());
-                System.out.println(n1);
-                n2 = Long.parseLong(in.readLine());
-                System.out.println(n2);
-            } catch (NumberFormatException e) {
+            String sriga = in.readLine();
+            if (sriga.compareTo("!") == 0) {
                 return;
             }
 
-            String opCode = in.readLine();
-            System.out.println(opCode);
-
-            double result;
-            switch (opCode) {
-                case "1":
-                    // +
-                    result = n1 + n2;
-                    break;
-                case "2":
-                    // -
-                    result = n1 - n2;
-                    break;
-                case "3":
-                    // /
-                    result = (double) n1 / n2;
-                    break;
-                case "4":
-                    // *
-                    result = n1 * n2;
-                    break;
-                default:
-                    result = 0;
-                    s.close();
-                    return;
+            int riga = Integer.parseInt(sriga) - 1;
+            if(liste.size() < riga){
+                out.println("KO");
+                break;
+            } else{
+                out.println("OK");
             }
-            out.println(result);
-            System.out.println(result);
+
+            int posizione = Integer.parseInt(in.readLine()) - 1;
+            if((liste.get(riga)).size() < posizione){
+                out.println("KO");
+                break;
+            }
+            out.println("OK");
+            out.println(liste.get(riga).get(posizione));
+
         }
     }
 }
